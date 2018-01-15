@@ -2,11 +2,12 @@
 # 定义程序路由
 from datetime import datetime
 from flask import render_template,session,redirect,url_for
-
+from flask_login import login_required
+from ..decorators import admin_required,permission_required
 from . import main
 from .forms import NameForm
 from .. import db
-from ..models import User
+from ..models import User,Permission
 
 # 蓝本中视图函数两点不同:
 # 1)路由修饰器由蓝本提供;
@@ -20,6 +21,20 @@ def index():
 	return render_template('index.html',form = form,name = session.get('name'),
 		    		known = session.get('known',False),
                                 current_time = datetime.utcnow())
+
+
+@main.route('/admin')
+@login_required
+@admin_required
+def for_admins_only():
+    return "For adminstrators!"
+
+@main.route('/moderator')
+@login_required
+@permission_required(Permission.MODERATE_COMMENTS)
+def for_moderators_only():
+    return "For comment moderators!"
+
 '''
 @main.route('/user/<username>')
 def user(username):
@@ -29,3 +44,4 @@ def user(username):
         posts = pagination.items
         return render_template('user.html', user=user, posts=posts,pagination=pagination)
 '''
+

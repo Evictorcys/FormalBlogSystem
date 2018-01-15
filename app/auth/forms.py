@@ -15,8 +15,7 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
 	email = StringField('邮箱:',validators = [Required(),Length(1,64),Email()])
 	username = StringField('用户名:',validators = [
-		Required(),Length(1,64),Regexp('^[A-Za-z][A-Za-z0-9_]*$',0,
-									   '用户名必须仅含字母、数字、下划线!')])
+		Required(),Length(1,64),Regexp('^[A-Za-z][A-Za-z0-9_]*$',0,'用户名必须仅含字母、数字、下划线!')])
 	password = PasswordField('密码:',validators = [
 		Required(),EqualTo('password2',message = '两次密码必须相同!')])
 	password2 = PasswordField('确认密码:',validators = [Required()])
