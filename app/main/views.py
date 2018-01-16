@@ -47,9 +47,9 @@ def edit_profile():
         db.session.add(current_user)
         flash('您的个人信息修改成功!')
         return redirect(url_for('.user',username = current_user.username))
-    form.realname = current_user.realname
-    form.location = current_user.location
-    form.aboutme = current_user.aboutme
+    form.realname.data = current_user.realname
+    form.location.data = current_user.location
+    form.aboutme.data = current_user.aboutme
     return render_template('edit_profile.html',form = form)
 
 # 管理员资料编辑路由
