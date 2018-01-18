@@ -5,6 +5,8 @@ from wtforms import StringField,SubmitField,TextAreaField,BooleanField,SelectFie
 from wtforms.validators import Required,Length,Email,Regexp
 from wtforms import ValidationError
 from ..models import User,Role
+# Markdown的文章表单
+from flask_pagedown.fields import PageDownField
 
 class NameForm(FlaskForm):
 	name = StringField("用户名",validators = [Required()])
@@ -42,5 +44,10 @@ class EditProfileAdminForm(FlaskForm):
         if field.data != self.user.username and \
         User.query.filter_by(username=field.data).first():
             raise ValidationError('该用户名已被使用!')
+
+# 博客文章表单
+class PostForm(FlaskForm):
+    body = PageDownField("正文:",validators = [Required()])
+    submit = SubmitField('提交')
 
 

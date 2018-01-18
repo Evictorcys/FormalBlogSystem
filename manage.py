@@ -3,7 +3,7 @@
 # 加入shebang声明,故可通过./manage.py执行脚本
 import os
 from app import create_app,db
-from app.models import User,Role
+from app.models import User,Role,Post
 from flask_script import Manager,Shell
 from flask_migrate import Migrate,MigrateCommand
 

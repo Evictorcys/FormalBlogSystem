@@ -3,7 +3,8 @@ from flask_login import login_user,logout_user,login_required,current_user
 from . import auth
 from .. import db
 from ..models import User
-from .forms import LoginForm,RegistrationForm,ChangePasswordForm,ChangeEmailForm
+from .forms import LoginForm,RegistrationForm,ChangePasswordForm,ChangeEmailForm, \
+        PasswordResetRequestForm, PasswordResetForm
 from ..email import send_email
 
 @auth.route('/login',methods = ['GET','POST'])
@@ -109,8 +110,7 @@ def password_reset_request():
                        'auth/email/reset_password',
                        user=user, token=token,
                        next=request.args.get('next'))
-        flash('An email with instructions to reset your password has been '
-              'sent to you.')
+        flash('密码重置链接已经发送到您的邮箱了!')
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
 
