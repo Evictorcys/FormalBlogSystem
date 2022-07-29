@@ -39,7 +39,7 @@ language-selector==0.1
 lxml==4.1.1
 Mako==1.0.7
 MarkupSafe==1.0
-mistune==0.8.3
+mistune==2.0.3
 multidict==3.3.2
 nbconvert==5.3.1
 nbformat==4.4.0
